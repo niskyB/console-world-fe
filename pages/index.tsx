@@ -7,6 +7,7 @@ import { FormErrorMessage } from '../src/core/components/form/formErrorMessage';
 import { TextField } from '../src/core/components/form/textField';
 import { RadioField } from '../src/core/components/form/radioField';
 import { SelectField } from '../src/core/components/form/selectField';
+import Link from 'next/link';
 
 interface TestDto {
     username: string;
@@ -51,7 +52,13 @@ const Home: NextPage = () => {
                     ]}
                 />
             </FormWrapper>
+
             <h1 className="text-3xl font-bold underline">{process.env.MY_ENV}</h1>
+            <Link href={'/auth/login'} passHref>
+                <a type="button" className="inline-flex items-center px-4 py-2 text-sm font-semibold border-2 rounded-md shadow-sm">
+                    Login
+                </a>
+            </Link>
         </div>
     );
 };

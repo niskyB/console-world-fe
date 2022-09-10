@@ -1,15 +1,11 @@
 import { http } from '../../../../core/api';
-import joi from 'joi';
-import { User, userSchema } from '../../../../core/models/user';
-
-export interface AuthLoginDto extends Pick<User, 'username' | 'password'> {}
-export const authLoginSchema = joi.object<AuthLoginDto>({
-    username: userSchema.username,
-    password: userSchema.password,
-});
+import { AuthLoginDto } from './interface';
 
 export const authLogin = async (input: AuthLoginDto) => {
-    const res = await http.post('/auth/login', input);
-
-    return res.data;
+    try {
+        const res = await http.post('/auth/login', input);
+        return res;
+    } catch (error) {
+        return null;
+    }
 };
