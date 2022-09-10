@@ -11,7 +11,6 @@ export interface UserState extends User {
 
 const initialState: UserState = {
     email: '',
-    username: '',
     name: '',
     id: '',
     createDate: '',
