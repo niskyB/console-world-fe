@@ -38,7 +38,6 @@ export const Login: React.FC<LoginProps> = () => {
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
                     <FormWrapper methods={methods}>
-                        <FormErrorMessage />
                         <form onSubmit={methods.handleSubmit(_handleOnSubmit)} className="space-y-5">
                             <TextField label="Email address" name="email" type="email" />
                             <TextField label="Password" name="password" type="password" />
