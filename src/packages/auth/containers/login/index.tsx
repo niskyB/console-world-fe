@@ -1,13 +1,12 @@
-import { joiResolver } from '@hookform/resolvers/joi';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormErrorMessage, FormWrapper, TextField } from '../../../../core/components/form';
 
-import { authLogin, AuthLoginDto, authLoginSchema } from './action';
+import { authLogin, AuthLoginDto } from './action';
 
 const defaultValues: AuthLoginDto = {
     password: '',
-    username: '',
+    email: '',
 };
 
 interface LoginProps {}
@@ -15,7 +14,6 @@ interface LoginProps {}
 export const Login: React.FC<LoginProps> = () => {
     const methods = useForm<AuthLoginDto>({
         defaultValues,
-        resolver: joiResolver(authLoginSchema),
     });
 
     const _handleOnSubmit = async (data: AuthLoginDto) => {
@@ -28,7 +26,7 @@ export const Login: React.FC<LoginProps> = () => {
             <h1>Auth Login</h1>
             <FormErrorMessage />
             <form onSubmit={methods.handleSubmit(_handleOnSubmit)}>
-                <TextField label="Username" name="username" />
+                <TextField label="Email" name="email" />
                 <TextField label="Password" name="password" type="password" />
                 <button>Submit</button>
             </form>
