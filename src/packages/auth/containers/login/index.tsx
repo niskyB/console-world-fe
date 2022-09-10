@@ -40,7 +40,7 @@ export const Login: React.FC<LoginProps> = () => {
                     <FormWrapper methods={methods}>
                         <FormErrorMessage />
                         <form onSubmit={methods.handleSubmit(_handleOnSubmit)} className="space-y-5">
-                            <TextField label="Email address" name="email" type="email" />
+                            <TextField label="Email Address" name="email" type="email" />
                             <TextField label="Password" name="password" type="password" />
                             <FormErrorMessage />
                             <div className="flex flex-col items-end justify-center mt-1">
