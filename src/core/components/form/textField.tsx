@@ -21,6 +21,7 @@ export const TextField: React.FC<TextFieldProps> = ({ name, label, isRequired = 
                 </label>
                 {isRequired && (
                     <p className="inline text-red-500" id="require">
+                        {' '}
                         *
                     </p>
                 )}
