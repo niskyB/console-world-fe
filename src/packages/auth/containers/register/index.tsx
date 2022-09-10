@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { routes } from '../../../../core/routes';
 import { store } from '../../../../core/store';
 import { apiActions } from '../../../../core/store/api';
+import Link from 'next/link';
 
 const defaultValues: AuthRegisterDto = {
     password: '',
@@ -41,7 +42,7 @@ export const Register: React.FC<RegisterProps> = () => {
             <FormErrorMessage />
             <div className="flex flex-col justify-center min-h-full py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                    <h2 className="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">Sign up</h2>
+                    <h2 className="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">Register</h2>
                 </div>
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -51,12 +52,20 @@ export const Register: React.FC<RegisterProps> = () => {
                             <TextField label="Name" name="name" />
                             <TextField label="Password" name="password" type="password" />
                             <TextField label="Confirm Password" name="confirmPassword" type="password" />
-                            <button
-                                type="submit"
-                                className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                                Sign up
-                            </button>
+                            <div className="flex flex-col items-center space-y-4">
+                                <button
+                                    type="submit"
+                                    className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                >
+                                    Register
+                                </button>
+                                <div className="space-x-1 text-sm">
+                                    <span className="">Already have an account?</span>
+                                    <Link href={routes.loginUrl}>
+                                        <a className="font-medium text-indigo-600 underline hover:text-indigo-500">Login here</a>
+                                    </Link>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
