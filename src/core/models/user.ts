@@ -20,4 +20,5 @@ export interface User {
     updateDate: string;
     status: UserStatus;
     role: UserRole;
+    imageUrl: string;
 }

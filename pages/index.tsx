@@ -9,6 +9,7 @@ import { RadioField } from '../src/core/components/form/radioField';
 import { SelectField } from '../src/core/components/form/selectField';
 import Link from 'next/link';
 import { routes } from '../src/core/routes';
+import { Navigation } from '../src/packages/store/container/navigation';
 
 interface TestDto {
     username: string;
@@ -32,29 +33,7 @@ const Home: NextPage = () => {
 
     return (
         <div>
-            <FormWrapper methods={methods}>
-                {/* <TextField name="username" label="Username" /> */}
-                <TextField name="username" label="Username" type="file" />
-                <RadioField
-                    name="hello"
-                    label="test"
-                    values={[
-                        { label: 'test', value: '23' },
-                        { label: 'tes3t', value: '24' },
-                    ]}
-                />
-                <FormErrorMessage />
-                <SelectField
-                    name="lll"
-                    label="test"
-                    values={[
-                        { label: 'test', value: '23' },
-                        { label: 'tes3t', value: '24' },
-                    ]}
-                />
-            </FormWrapper>
-
-            <h1 className="text-3xl font-bold underline">{process.env.MY_ENV}</h1>
+            <Navigation />
             <Link href={routes.loginUrl} passHref>
                 <a type="button" className="inline-flex items-center px-4 py-2 text-sm font-semibold border-2 rounded-md shadow-sm">
                     Login

@@ -20,6 +20,7 @@ const initialState: UserState = {
     role: UserRole.ADMIN,
     status: UserStatus.ACTIVE,
     isLogin: false,
+    imageUrl: '',
 };
 
 const reducer = createSlice({
