@@ -1,5 +1,11 @@
 export const routes = {
-    loginUrl: '/auth/login',
     homeUrl: '/',
+
+    // auth
+    loginUrl: '/auth/login',
     registerUrl: '/auth/register',
+
+    // user
+    meUrl: '/user/me',
+    changePasswordUrl: '/user/change-password',
 };

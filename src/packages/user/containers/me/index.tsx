@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
-import { FormWrapper, TextField } from '../../../../core/components/form';
+import { FormErrorMessage, FormWrapper, TextField } from '../../../../core/components/form';
 import { toast } from 'react-toastify';
 import { useStoreUser } from '../../../../core/store';
 import { EditProfileDto, updateProfile } from './action';
+import { routes } from '../../../../core/routes';
 
 const defaultValues: EditProfileDto = {
     name: '',
@@ -25,10 +26,11 @@ export const UserMe: React.FC<UserMeProps> = () => {
     }, [userState, methods]);
 
     const _handleOnSubmit = async (data: EditProfileDto) => {
-        const res = await updateProfile(data);
-        if (res.status === 200) {
-            console.log(res.status);
+        try {
+            await updateProfile(data);
             toast.success('Update profile success!');
+        } catch (err) {
+            toast.error('Update Profile fail!');
         }
     };
 
@@ -58,9 +60,10 @@ export const UserMe: React.FC<UserMeProps> = () => {
                         </div>
                         <TextField label="Name" name="name" />
                         <TextField label="Phone Number" name="phone" />
+                        <FormErrorMessage />
                         <div className="mt-4 space-y-2">
                             <div className="flex-shrink-0">
-                                <Link href="#">
+                                <Link href={routes.changePasswordUrl}>
                                     <p className="font-medium text-indigo-600 cursor-pointer hover:text-indigo-500 w-fit">Change Password</p>
                                 </Link>
                             </div>
