@@ -5,6 +5,9 @@ import { Provider } from 'react-redux';
 import { store } from '../src/core/store';
 import { GetCurrentUserWrapper } from '../src/core/components/routerProtection';
 import { ProgressBar } from '../src/core/components/loading';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { CommonLayoutWrapper } from '../src/core/components/layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -14,8 +17,21 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Provider store={store}>
                 <GetCurrentUserWrapper>
                     <ProgressBar />
-                    <Component {...pageProps} />
+                    <CommonLayoutWrapper>
+                        <Component {...pageProps} />
+                    </CommonLayoutWrapper>
                 </GetCurrentUserWrapper>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
             </Provider>
         </>
     );
