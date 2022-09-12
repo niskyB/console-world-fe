@@ -27,15 +27,14 @@ const GUEST_SELECTION = [
     { label: 'Register', link: routes.registerUrl },
 ];
 
-const _onLogout = async () => {
-    const res = await logout();
-    if (res) window.location.reload();
-};
-
 export const Navigation: React.FunctionComponent<NavigationProps> = () => {
     const router = useRouter();
     const userState = useStoreUser();
     const [popUp, setPopUp] = React.useState<boolean>(false);
+    const _onLogout = async () => {
+        const res = await logout();
+        if (res) window.location.reload();
+    };
     return (
         <Disclosure as="nav" className="bg-white shadow">
             {({ open }) => (
