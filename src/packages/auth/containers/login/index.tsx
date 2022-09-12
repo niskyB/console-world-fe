@@ -31,7 +31,7 @@ export const Login: React.FC<LoginProps> = () => {
     };
 
     return (
-        <div className="flex flex-col justify-center w-full h-[100vh] sm:px-6 lg:px-8 bg-gray-200">
+        <div className="flex flex-col justify-center w-full min-h-full py-12 intro-y sm:px-6 lg:px-8 bg-gray-200">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="text-3xl font-extrabold text-center text-gray-900">Auth Login</h2>
             </div>
