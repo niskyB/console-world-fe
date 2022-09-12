@@ -1,14 +1,13 @@
 export const routes = {
-    //store
     homeUrl: '/',
 
-    //auth
+    // auth
     loginUrl: '/auth/login',
     registerUrl: '/auth/register',
 
     // user
     meUrl: '/user/me',
-
+    changePasswordUrl: '/user/change-password',
     //product
     productUrl: '/product',
 };

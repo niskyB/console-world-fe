@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useStoreUser } from '../../../../core/store';
 import { useRouter } from 'next/router';
 import { routes } from '../../../../core/routes';
+import { UserRole } from '../../../../core/models/role';
 import { logout } from './action';
 
 interface NavigationProps {}
@@ -14,7 +15,7 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
 }
 const NAV_LINK = [
-    { label: 'Home', link: '' },
+    { label: 'Home', link: '/' },
     { label: 'About', link: '/about' },
     { label: 'Contact', link: '/contact' },
     { label: 'Product', link: '/product' },
@@ -34,6 +35,7 @@ const _onLogout = async () => {
 export const Navigation: React.FunctionComponent<NavigationProps> = () => {
     const router = useRouter();
     const userState = useStoreUser();
+    const [popUp, setPopUp] = React.useState<boolean>(false);
     return (
         <Disclosure as="nav" className="bg-white shadow">
             {({ open }) => (
@@ -61,8 +63,8 @@ export const Navigation: React.FunctionComponent<NavigationProps> = () => {
                                             </a>
                                         </Link>
                                     ))}
-                                    {/* {userState.role.description !== UserRole.CUSTOMER && (
-                                        <Link href={dashBoardLink}>
+                                    {/* {userState.role !== UserRole.USER && (
+                                        <Link href={'/dashBoardLink'}>
                                             <a
                                                 className={`${'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 `}
                                             >
@@ -103,14 +105,14 @@ export const Navigation: React.FunctionComponent<NavigationProps> = () => {
                                 </Disclosure.Button>
                             </div>
                             <div className="flex items-center">
-                                {/* {userState.id && userState.role.description === UserRole.CUSTOMER && (
+                                {userState.id && userState.role === UserRole.USER && (
                                     <div
                                         onClick={() => setPopUp(true)}
                                         className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm cursor-pointer hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                     >
                                         Deposit
                                     </div>
-                                )} */}
+                                )}
                                 <div className="hidden lg:ml-4 lg:flex lg:items-center">
                                     {/* Profile dropdown */}
                                     {userState.id ? (
@@ -119,7 +121,7 @@ export const Navigation: React.FunctionComponent<NavigationProps> = () => {
                                                 <Menu.Button className="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                                     <img
                                                         className="w-8 h-8 rounded-full"
-                                                        src={userState.imageUrl ? userState.imageUrl : '/asset/images/default-avatar.png'}
+                                                        src={userState.imageUrl ? userState.imageUrl : '/asset/images/avatar/default-avatar.png'}
                                                         alt="avatar"
                                                     />
                                                 </Menu.Button>
@@ -205,71 +207,6 @@ export const Navigation: React.FunctionComponent<NavigationProps> = () => {
                                         </Link>
                                     )}
                                 </div>
-                            </div>
-                            <div className="hidden lg:ml-4 lg:flex lg:items-center">
-                                <button
-                                    type="button"
-                                    className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                >
-                                    <span className="sr-only">View notifications</span>
-                                    {/* <BellIcon className="h-6 w-6" aria-hidden="true" /> */}
-                                </button>
-
-                                {/* Profile dropdown */}
-                                <Menu as="div" className="relative ml-4 flex-shrink-0">
-                                    <div>
-                                        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                            <span className="sr-only">Open user menu</span>
-                                            <img
-                                                className="h-8 w-8 rounded-full"
-                                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                alt=""
-                                            />
-                                        </Menu.Button>
-                                    </div>
-                                    <Transition
-                                        as={Fragment}
-                                        enter="transition ease-out duration-100"
-                                        enterFrom="transform opacity-0 scale-95"
-                                        enterTo="transform opacity-100 scale-100"
-                                        leave="transition ease-in duration-75"
-                                        leaveFrom="transform opacity-100 scale-100"
-                                        leaveTo="transform opacity-0 scale-95"
-                                    >
-                                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Your Profile
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Settings
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Sign out
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                        </Menu.Items>
-                                    </Transition>
-                                </Menu>
                             </div>
                         </div>
                     </div>
