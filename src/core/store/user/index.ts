@@ -17,9 +17,10 @@ const initialState: UserState = {
     updateDate: '',
     googleId: '',
     password: '',
-    role: UserRole.ADMIN,
+    role: UserRole.ADMIN || UserRole.USER,
     status: UserStatus.ACTIVE,
     isLogin: false,
+    imageUrl: '',
 };
 
 const reducer = createSlice({

@@ -8,4 +8,6 @@ export const routes = {
     // user
     meUrl: '/user/me',
     changePasswordUrl: '/user/change-password',
+    //product
+    productUrl: '/product',
 };

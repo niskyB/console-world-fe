@@ -31,7 +31,7 @@ export const Login: React.FC<LoginProps> = () => {
     };
 
     return (
-        <div className="flex flex-col justify-center h-[100vh] sm:px-6 lg:px-8 bg-gray-200">
+        <div className="flex flex-col justify-center w-full h-[100vh] sm:px-6 lg:px-8 bg-gray-200">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="text-3xl font-extrabold text-center text-gray-900">Auth Login</h2>
             </div>
@@ -39,7 +39,7 @@ export const Login: React.FC<LoginProps> = () => {
                 <div className="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
                     <FormWrapper methods={methods}>
                         <form onSubmit={methods.handleSubmit(_handleOnSubmit)} className="space-y-5">
-                            <TextField label="Email address" name="email" type="email" />
+                            <TextField label="Email Address" name="email" type="email" />
                             <TextField label="Password" name="password" type="password" />
                             <FormErrorMessage />
                             <div className="flex flex-col items-end justify-center mt-1">

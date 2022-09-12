@@ -15,10 +15,10 @@ export interface User {
     name: string;
     password: string;
     email: string;
-    phone: string;
     googleId: string;
     createDate: string;
     updateDate: string;
     status: UserStatus;
     role: UserRole;
+    imageUrl: string;
 }
