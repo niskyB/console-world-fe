@@ -19,7 +19,7 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
     const methods = useForm<UserAddressDto>({ defaultValues });
     const [addresses, setAddresses] = React.useState<Address[]>([]);
 
-    React.useEffect(() => {
+    const fetchApi = () => {
         getListUserAddress()
             .then((res) => {
                 setAddresses(res);
@@ -28,11 +28,16 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
             .catch((err) => {
                 if (err.status >= 500) toast.error('Something went wrong!');
             });
+    };
+
+    React.useEffect(() => {
+        fetchApi();
     }, []);
 
     const _handleOnSubmit = async (data: UserAddressDto) => {
         try {
             await addUserAddress(data);
+            fetchApi();
             toast.success('Add Address Success!');
         } catch (err) {
             toast.error('Add Address Fail!');

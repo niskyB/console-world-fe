@@ -6,7 +6,7 @@ export interface UserAddressDto {
 }
 
 export const addUserAddress = async (input: UserAddressDto) => {
-    const res = await http.post('/user/password', input);
+    const res = await http.post('/address', input);
     return res.data;
 };
 
