@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { FormErrorMessage, FormWrapper, TextField } from '../../../../core/components/form';
+import { routes } from '../../../../core/routes';
 import { ChangePasswordDto, userChangePassword } from './action';
 
 interface PasswordProps {}
@@ -34,7 +36,13 @@ export const ChangePassword: React.FunctionComponent<PasswordProps> = () => {
                     <TextField label="New Password" name="newPassword" type="password" />
                     <TextField label="Confirm Password " name="confirmNewPassword" type="password" />
                     <FormErrorMessage />
-                    <div className="flex justify-end">
+                    <div className="flex justify-end space-x-2">
+                        <button
+                            type="button"
+                            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        >
+                            <Link href={routes.meUrl}>Back To Profile</Link>
+                        </button>
                         <button
                             type="submit"
                             className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

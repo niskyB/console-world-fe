@@ -71,7 +71,7 @@ export const UserMe: React.FC<UserMeProps> = () => {
                                     </Link>
                                 </div>
                                 <div className="flex-shrink-0">
-                                    <Link href="#">
+                                    <Link href={routes.userAddressUrl}>
                                         <p className="font-medium text-indigo-600 cursor-pointer hover:text-indigo-500 w-fit">Manage Address</p>
                                     </Link>
                                 </div>
