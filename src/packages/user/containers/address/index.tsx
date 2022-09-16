@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { FormErrorMessage, FormWrapper, TextField } from '../../../../core/components/form';
 import { Address } from '../../../../core/models/address';
 import { routes } from '../../../../core/routes';
-import { addUserAddress, getListUserAddress, UserAddressDto, deleteUserAddress, updateUserAddress } from './action';
+import { addUserAddress, getListUserAddress, UserAddressDto, deleteUserAddress, updateUserAddress, setDefaultUserAddress } from './action';
 import { AddressFrom } from './components/addressFrom';
 
 interface AddressProps {}
@@ -66,6 +66,16 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
         }
     };
 
+    const _handleOnSetDefault = async (id: string) => {
+        try {
+            await setDefaultUserAddress(id);
+            fetchApi();
+            toast.success('Set Default Address Success!');
+        } catch (err) {
+            toast.error('Set Default Address Fail!');
+        }
+    };
+
     return (
         <div className="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
             <FormWrapper methods={methods}>
@@ -95,7 +105,7 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
             <div className="space-y-4">
                 {addresses.map((item) => (
                     <div key={item.id} className="flex">
-                        <AddressFrom address={item} onDelete={_handleOnDelete} onSubmit={_handleOnUpdate} />
+                        <AddressFrom address={item} onDelete={_handleOnDelete} onSubmit={_handleOnUpdate} onSetDefault={_handleOnSetDefault} />
                     </div>
                 ))}
             </div>

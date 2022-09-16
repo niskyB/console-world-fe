@@ -8,9 +8,10 @@ interface AddressProps {
     address: Address;
     onSubmit: (data: UserAddressDto, id?: string) => Promise<any>;
     onDelete: (id: string) => void;
+    onSetDefault: (id: string) => void;
 }
 
-export const AddressFrom: React.FunctionComponent<AddressProps> = ({ address, onSubmit, onDelete }) => {
+export const AddressFrom: React.FunctionComponent<AddressProps> = ({ address, onSubmit, onDelete, onSetDefault }) => {
     const [isPopUpOpening, setIsPopUpOpening] = React.useState<boolean>(false);
 
     return (
@@ -19,13 +20,28 @@ export const AddressFrom: React.FunctionComponent<AddressProps> = ({ address, on
                 <ul role="list" className="border border-gray-200 divide-y divide-gray-200 rounded-md">
                     <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                         <div className="flex items-center flex-1 w-0 align-middle">
-                            <MapPinIcon className="flex-shrink-0 w-5 h-5 text-gray-400" aria-hidden="true" />
+                            <MapPinIcon
+                                className={`flex-shrink-0 w-5 h-5 ${address.isDefault ? 'text-green-400' : 'text-gray-400'}`}
+                                aria-hidden="true"
+                            />
                             <span className="flex-1 w-0 ml-2 truncate">{address.location}</span>
+                            {!address.isDefault && (
+                                <button
+                                    onClick={() => onSetDefault(address.id)}
+                                    type="button"
+                                    className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                                >
+                                    Set As Default
+                                </button>
+                            )}
                         </div>
                     </li>
                     <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                         <div className="flex items-center flex-1 w-0">
-                            <DevicePhoneMobileIcon className="flex-shrink-0 w-5 h-5 text-gray-400" aria-hidden="true" />
+                            <DevicePhoneMobileIcon
+                                className={`flex-shrink-0 w-5 h-5 ${address.isDefault ? 'text-green-400' : 'text-gray-400'}`}
+                                aria-hidden="true"
+                            />
                             <span className="flex-1 w-0 ml-2 truncate">{address.phone}</span>
                         </div>
                     </li>

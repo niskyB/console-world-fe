@@ -20,6 +20,11 @@ export const updateUserAddress = async (id: string, data: UserAddressDto) => {
     return res.data;
 };
 
+export const setDefaultUserAddress = async (id: string) => {
+    const res = await http.put(`/address/${id}`);
+    return res.data;
+};
+
 export const deleteUserAddress = async (id: string) => {
     const res = await http.delete(`/address/${id}`);
     return res;
