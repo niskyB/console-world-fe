@@ -6,7 +6,8 @@ import { toast } from 'react-toastify';
 import { FormErrorMessage, FormWrapper, TextField } from '../../../../core/components/form';
 import { Address } from '../../../../core/models/address';
 import { routes } from '../../../../core/routes';
-import { addUserAddress, getListUserAddress, UserAddressDto, deleteUserAddress } from './action';
+import { addUserAddress, getListUserAddress, UserAddressDto, deleteUserAddress, updateUserAddress } from './action';
+import { AddressFrom } from './components/addressFrom';
 
 interface AddressProps {}
 
@@ -43,7 +44,7 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
         }
     };
 
-    const _handleOnSubmit = async (data: UserAddressDto) => {
+    const _handleOnCreate = async (data: UserAddressDto) => {
         try {
             await addUserAddress(data);
             fetchApi();
@@ -53,12 +54,24 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
         }
     };
 
+    const _handleOnUpdate = async (data: UserAddressDto, id?: string): Promise<any> => {
+        try {
+            await updateUserAddress(id || '', data);
+            fetchApi();
+            toast.success('Update Address Success!');
+            return null;
+        } catch (err) {
+            toast.error('Update Address Fail!');
+            return err;
+        }
+    };
+
     return (
         <div className="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
             <FormWrapper methods={methods}>
                 <h3 className="text-lg font-medium leading-6 text-gray-900">Add New Address</h3>
                 <FormErrorMessage />
-                <form className="pt-8 space-y-6" onSubmit={methods.handleSubmit(_handleOnSubmit)}>
+                <form className="pt-8 space-y-6" onSubmit={methods.handleSubmit(_handleOnCreate)}>
                     <TextField label="Location" name="location" type="text" />
                     <TextField label="Phone Number" name="phone" type="text" />
                     <FormErrorMessage />
@@ -82,28 +95,7 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
             <div className="space-y-4">
                 {addresses.map((item) => (
                     <div key={item.id} className="flex">
-                        <dd className="flex-1 text-sm text-gray-900">
-                            <ul role="list" className="border border-gray-200 divide-y divide-gray-200 rounded-md">
-                                <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                                    <div className="flex items-center flex-1 w-0">
-                                        <MapPinIcon className="flex-shrink-0 w-5 h-5 text-gray-400" aria-hidden="true" />
-                                        <span className="flex-1 w-0 ml-2 truncate">{item.location}</span>
-                                    </div>
-                                </li>
-                                <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                                    <div className="flex items-center flex-1 w-0">
-                                        <DevicePhoneMobileIcon className="flex-shrink-0 w-5 h-5 text-gray-400" aria-hidden="true" />
-                                        <span className="flex-1 w-0 ml-2 truncate">{item.phone}</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </dd>
-                        <div className="h-full my-auto ml-4">
-                            <p className="block font-medium text-center text-indigo-600 cursor-pointer hover:text-indigo-500">Edit</p>
-                            <p onClick={() => _handleOnDelete(item.id)} className="block font-medium text-red-600 cursor-pointer hover:text-red-500">
-                                Delete
-                            </p>
-                        </div>
+                        <AddressFrom address={item} onDelete={_handleOnDelete} onSubmit={_handleOnUpdate} />
                     </div>
                 ))}
             </div>

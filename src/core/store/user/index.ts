@@ -13,6 +13,7 @@ const initialState: UserState = {
     email: '',
     name: '',
     id: '',
+    phone: '',
     createDate: '',
     updateDate: '',
     googleId: '',

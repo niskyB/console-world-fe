@@ -15,6 +15,11 @@ export const getListUserAddress = async () => {
     return res.data;
 };
 
+export const updateUserAddress = async (id: string, data: UserAddressDto) => {
+    const res = await http.put(`/address/${id}`, data);
+    return res.data;
+};
+
 export const deleteUserAddress = async (id: string) => {
     const res = await http.delete(`/address/${id}`);
     return res;

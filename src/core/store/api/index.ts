@@ -21,10 +21,7 @@ const reducer = createSlice({
     initialState,
     reducers: {
         initReq: (state) => ({ ...state, isLoading: true, isError: false }),
-        setLoading: (
-            state,
-            { payload }: PayloadAction<{ isLoading: boolean }>
-        ) => ({
+        setLoading: (state, { payload }: PayloadAction<{ isLoading: boolean }>) => ({
             ...state,
             isLoading: payload.isLoading,
         }),
