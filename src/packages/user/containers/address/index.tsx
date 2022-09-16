@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { FormErrorMessage, FormWrapper, TextField } from '../../../../core/components/form';
 import { Address } from '../../../../core/models/address';
 import { routes } from '../../../../core/routes';
-import { addUserAddress, getListUserAddress, UserAddressDto } from './action';
+import { addUserAddress, getListUserAddress, UserAddressDto, deleteUserAddress } from './action';
 
 interface AddressProps {}
 
@@ -22,8 +22,7 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
     const fetchApi = () => {
         getListUserAddress()
             .then((res) => {
-                setAddresses(res);
-                console.log(res);
+                if (addresses.length !== 0 || res.length !== 0) setAddresses(res);
             })
             .catch((err) => {
                 if (err.status >= 500) toast.error('Something went wrong!');
@@ -33,6 +32,16 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
     React.useEffect(() => {
         fetchApi();
     }, []);
+
+    const _handleOnDelete = async (id: string) => {
+        try {
+            await deleteUserAddress(id);
+            fetchApi();
+            toast.success('Delete Address Success!');
+        } catch (err) {
+            toast.error('Delete Address Fail!');
+        }
+    };
 
     const _handleOnSubmit = async (data: UserAddressDto) => {
         try {
@@ -89,10 +98,11 @@ export const UserAddress: React.FunctionComponent<AddressProps> = () => {
                                 </li>
                             </ul>
                         </dd>
-                        <div className="my-auto ml-4">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                Edit
-                            </a>
+                        <div className="h-full my-auto ml-4">
+                            <p className="block font-medium text-center text-indigo-600 cursor-pointer hover:text-indigo-500">Edit</p>
+                            <p onClick={() => _handleOnDelete(item.id)} className="block font-medium text-red-600 cursor-pointer hover:text-red-500">
+                                Delete
+                            </p>
                         </div>
                     </div>
                 ))}
