@@ -1,34 +1,35 @@
 import * as React from 'react';
 import { useFormContext } from 'react-hook-form';
+// import { RedStar } from '../../../packages/store';
+import { SelectionFieldValues } from '../../common/interface';
+import { useStoreApi } from '../../store';
+import CommonFieldWrapper from './commonFieldWrapper';
 
-interface SelectFieldProps {
+interface SelectFieldProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
     name: string;
-    label: string;
-    values: Array<{ label: string; value: any }>;
+    label?: string;
+    values: Array<SelectionFieldValues<any>>;
+    isRequire?: boolean;
+    direction?: 'row' | 'column';
 }
 
-export const SelectField: React.FC<SelectFieldProps> = ({ name, label, values }) => {
-    const {
-        register,
-        formState: { errors },
-    } = useFormContext();
+export const SelectField: React.FC<SelectFieldProps> = ({ name, label, values, direction, isRequire = true, ...rest }) => {
+    const { register } = useFormContext();
 
     return (
-        <div>
-            <label htmlFor={name}>{label}</label>
-            <select id={name} {...register(name)}>
+        <CommonFieldWrapper name={name} label={label} isRequire={isRequire} direction={direction}>
+            <select
+                {...register(name)}
+                {...rest}
+                id={name}
+                className="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
                 {values.map((item) => (
-                    <option key={item.value} value={item.value}>
+                    <option className="capitalize" key={item.value} value={item.value}>
                         {item.label}
                     </option>
                 ))}
             </select>
-
-            {Boolean(errors[name]?.message) && (
-                <div>
-                    {label} {errors[name]?.message}
-                </div>
-            )}
-        </div>
+        </CommonFieldWrapper>
     );
 };

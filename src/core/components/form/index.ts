@@ -5,4 +5,5 @@ export * from './selectField';
 export * from './radioField';
 export * from './formSuccessMessage';
 export * from './formErrorMessage';
+export * from './quillInput';
 export * from './formWrapper';
