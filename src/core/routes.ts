@@ -12,4 +12,5 @@ export const routes = {
 
     //product
     productUrl: '/product',
+    adminProductListUrl: '/postproduct',
 };
