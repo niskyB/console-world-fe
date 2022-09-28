@@ -9,7 +9,7 @@ import { RadioField } from '../src/core/components/form/radioField';
 import { SelectField } from '../src/core/components/form/selectField';
 import Link from 'next/link';
 import { routes } from '../src/core/routes';
-import { Navigation } from '../src/packages/store/container/navigation';
+import { Navigation } from '../src/packages/store/components/navigation';
 import { StoreLayout } from '../src/packages/store/components/storeLayout';
 
 interface TestDto {

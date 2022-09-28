@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Navigation } from '../container/navigation';
+import { Navigation } from './navigation';
 
 interface StoreLayoutProps extends React.PropsWithChildren {}
 

@@ -8,6 +8,7 @@ import { store } from '../../../../core/store';
 import { apiActions } from '../../../../core/store/api';
 import Link from 'next/link';
 import { routes } from '../../../../core/routes';
+import { useRouter } from 'next/router';
 
 const defaultValues: AuthLoginDto = {
     password: '',
@@ -21,6 +22,8 @@ export const Login: React.FC<LoginProps> = () => {
         defaultValues,
     });
 
+    const router = useRouter();
+
     React.useEffect(() => {
         store.dispatch(apiActions.resetState());
         return () => {};
@@ -28,6 +31,7 @@ export const Login: React.FC<LoginProps> = () => {
     const _handleOnSubmit = async (data: AuthLoginDto) => {
         const res = await authLogin(data);
         if (res) window.location.reload();
+        // router.push(routes.homeUrl);
     };
 
     return (
