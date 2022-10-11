@@ -1,16 +1,14 @@
-import { SystemType } from '../common/interface';
-
-export interface ProductCategory extends SystemType<string> {}
+import { ProductCategory } from './productCategory';
 export interface Product {
     id: string;
     name: string;
-    briefInfo: string;
+    description: string;
     details: string;
-    thumbnailUrl: string;
+    price: number;
     createdAt: string;
     updatedAt: string;
-    isShow: boolean;
-    category: ProductCategory;
-    isFeature: boolean;
-    price: number;
+    imageUrl: string;
+    quantity: number;
+    isSale: boolean;
+    categories?: ProductCategory[];
 }
